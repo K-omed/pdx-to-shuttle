@@ -5,6 +5,7 @@
 - `npm run lint`: passed
 - `npm run build`: passed
 - `npm audit --omit=dev`: passed, 0 vulnerabilities
+- Hostinger compatibility: pinned to Next.js 15.5.20 and React 18.3.1
 - Static pages generated: 35
 - Dynamic server route: `/api/book`
 
