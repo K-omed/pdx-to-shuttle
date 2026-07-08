@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-label="Luxury black shuttle fleet illustration">
+  <rect width="1200" height="780" fill="#f0f3f8"/>
+  <rect x="80" y="90" width="1040" height="560" rx="34" fill="#ffffff"/>
+  <path d="M160 510 C330 460 492 452 660 470 C830 488 970 515 1080 485" fill="none" stroke="#d9e0ea" stroke-width="10"/>
+  <g transform="translate(225 250)">
+    <path d="M70 105 H610 C665 105 710 150 710 205 V270 H20 V160 C20 130 40 105 70 105 Z" fill="#071426"/>
+    <path d="M115 40 H475 C538 40 596 78 620 138 L645 200 H70 L93 70 C96 52 104 40 115 40 Z" fill="#10243d"/>
+    <path d="M140 68 H290 V155 H108 L124 84 C127 74 131 68 140 68 Z" fill="#bcd3ea"/>
+    <path d="M318 68 H476 C516 68 552 92 570 130 L582 155 H318 Z" fill="#bcd3ea"/>
+    <rect x="120" y="203" width="390" height="18" rx="9" fill="#c9a35b"/>
+    <circle cx="150" cy="285" r="54" fill="#050b14"/>
+    <circle cx="150" cy="285" r="24" fill="#e2e8f0"/>
+    <circle cx="570" cy="285" r="54" fill="#050b14"/>
+    <circle cx="570" cy="285" r="24" fill="#e2e8f0"/>
+  </g>
+  <text x="90" y="710" fill="#071426" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">PDX to Shuttle</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Premium shuttle arriving at Portland airport">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#071426"/>
+      <stop offset="0.55" stop-color="#10243d"/>
+      <stop offset="1" stop-color="#243b5a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" x2="1">
+      <stop offset="0" stop-color="#f5e8c8"/>
+      <stop offset="1" stop-color="#c9a35b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <path d="M0 740 C240 650 390 690 610 620 C820 554 1010 565 1210 500 C1390 442 1500 472 1600 430 L1600 1000 L0 1000 Z" fill="#0c1c32"/>
+  <path d="M0 830 H1600 V1000 H0 Z" fill="#050b14"/>
+  <path d="M250 755 C450 715 655 700 900 710 C1100 718 1300 735 1510 770" fill="none" stroke="#c9a35b" stroke-width="8" opacity=".8"/>
+  <g transform="translate(520 512)">
+    <rect x="0" y="90" width="620" height="150" rx="42" fill="#f8fafc"/>
+    <path d="M80 28 H442 C500 28 552 64 578 117 L612 186 H0 L34 78 C41 49 50 28 80 28 Z" fill="#ffffff"/>
+    <path d="M104 55 H240 V130 H72 L88 73 C91 62 95 55 104 55 Z" fill="#142842"/>
+    <path d="M266 55 H430 C470 55 502 77 522 116 L530 130 H266 Z" fill="#142842"/>
+    <rect x="82" y="160" width="315" height="18" rx="9" fill="url(#gold)"/>
+    <circle cx="135" cy="245" r="48" fill="#050b14"/>
+    <circle cx="135" cy="245" r="22" fill="#cbd5e1"/>
+    <circle cx="505" cy="245" r="48" fill="#050b14"/>
+    <circle cx="505" cy="245" r="22" fill="#cbd5e1"/>
+    <rect x="455" y="148" width="85" height="38" rx="10" fill="#071426"/>
+  </g>
+  <g opacity=".55" fill="#f5e8c8">
+    <circle cx="1330" cy="135" r="88"/>
+    <circle cx="180" cy="250" r="4"/>
+    <circle cx="340" cy="160" r="3"/>
+    <circle cx="1240" cy="300" r="3"/>
+  </g>
+</svg>
