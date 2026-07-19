@@ -11,10 +11,12 @@ export function baseMetadata({
   title,
   description,
   path,
+  noindex = false,
 }: {
   title: string;
   description: string;
   path: string;
+  noindex?: boolean;
 }): Metadata {
   const url = absoluteUrl(path);
   return {
@@ -29,20 +31,20 @@ export function baseMetadata({
       siteName: site.name,
       type: "website",
       locale: "en_US",
-      images: [{ url: "/images/og-pdx-to-shuttle.svg", width: 1200, height: 630 }],
+      images: [{ url: "/images/og-pdx-to-shuttle.jpg", width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/images/og-pdx-to-shuttle.svg"],
+      images: ["/images/og-pdx-to-shuttle.jpg"],
     },
     robots: {
-      index: true,
-      follow: true,
+      index: !noindex,
+      follow: !noindex,
       googleBot: {
-        index: true,
-        follow: true,
+        index: !noindex,
+        follow: !noindex,
         "max-image-preview": "large",
         "max-snippet": -1,
       },
@@ -51,26 +53,31 @@ export function baseMetadata({
 }
 
 export function organizationSchema() {
-  return {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "TransportationService"],
     name: site.name,
     legalName: site.legalName,
     url: site.domain,
-    telephone: site.phone,
-    email: site.email,
-    address: {
+    areaServed: ["Portland, OR", "Portland International Airport", "PDX"],
+    priceRange: "$$",
+    image: absoluteUrl("/images/og-pdx-to-shuttle.jpg"),
+  };
+
+  if (site.phone) schema.telephone = site.phone;
+  if (site.email) schema.email = site.email;
+  if (site.address) {
+    schema.address = {
       "@type": "PostalAddress",
       addressLocality: "Portland",
       addressRegion: "OR",
       addressCountry: "US",
       streetAddress: site.address,
-    },
-    areaServed: ["Portland, OR", "Portland International Airport", "PDX"],
-    openingHours: "Mo-Su 00:00-23:59",
-    priceRange: "$$",
-    image: absoluteUrl("/images/og-pdx-to-shuttle.svg"),
-  };
+    };
+  }
+  if (site.hours !== "By reservation") schema.openingHours = site.hours;
+
+  return schema;
 }
 
 export function websiteSchema() {
@@ -79,11 +86,6 @@ export function websiteSchema() {
     "@type": "WebSite",
     name: site.name,
     url: site.domain,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${site.domain.replace(/\/$/, "")}/blog?search={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -143,7 +145,6 @@ export const allIndexablePaths = [
   "/contact",
   "/privacy-policy",
   "/terms",
-  "/booking-success",
   ...landingPages.map((page) => `/${page.slug}`),
   ...blogPosts.map((post) => `/blog/${post.slug}`),
 ];

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { navLinks, serviceAreas, site } from "@/lib/site";
+import { hasPublicAddress, hasPublicEmail, hasPublicPhone, navLinks, serviceAreas, site } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -13,15 +13,26 @@ export function Footer() {
             and door-to-door transportation across the metro area.
           </p>
           <div className="mt-6 space-y-3 text-sm text-[#e2e8f0]">
-            <p className="flex items-center gap-3">
-              <Phone size={17} aria-hidden="true" /> {site.phone}
-            </p>
-            <p className="flex items-center gap-3">
-              <Mail size={17} aria-hidden="true" /> {site.email}
-            </p>
-            <p className="flex items-center gap-3">
-              <MapPin size={17} aria-hidden="true" /> {site.address}
-            </p>
+            {hasPublicPhone ? (
+              <p className="flex items-center gap-3">
+                <Phone size={17} aria-hidden="true" /> {site.phone}
+              </p>
+            ) : null}
+            {hasPublicEmail ? (
+              <p className="flex items-center gap-3">
+                <Mail size={17} aria-hidden="true" /> {site.email}
+              </p>
+            ) : null}
+            {hasPublicAddress ? (
+              <p className="flex items-center gap-3">
+                <MapPin size={17} aria-hidden="true" /> {site.address}
+              </p>
+            ) : null}
+            {!hasPublicPhone && !hasPublicEmail && !hasPublicAddress ? (
+              <p className="flex items-center gap-3">
+                <MapPin size={17} aria-hidden="true" /> Serving Portland and PDX by reservation
+              </p>
+            ) : null}
           </div>
         </div>
         <div>

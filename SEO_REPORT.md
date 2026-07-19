@@ -14,9 +14,9 @@
 
 Final local production audit:
 
-- URL: `http://127.0.0.1:3005`
-- Report file: `.lighthouse-home-final.json`
-- Performance: 95
+- URL: `http://127.0.0.1:3011`
+- Report file: `.lighthouse-seo-final.json`
+- Performance: 98
 - Accessibility: 100
 - Best Practices: 100
 - SEO: 100
@@ -35,11 +35,18 @@ Lighthouse completed report generation but exited with a Windows temp-profile cl
 - Breadcrumb JSON-LD
 - FAQ JSON-LD
 - Article JSON-LD for blog posts
+- Duplicate homepage LocalBusiness schema removed
+- WebSite SearchAction removed because no site search exists
+- Dummy phone, email, and address removed from visible content and structured data
+- `/booking-success` set to noindex/nofollow and removed from sitemap
 - Single H1 verified on key pages
 - Local service-area content
 - Internal links among services, landing pages, blog, and booking flow
 - AI-generated premium shuttle image saved as `public/images/pdx-shuttle-hero.webp`
+- AI-generated 1200x630 social image saved as `public/images/og-pdx-to-shuttle.jpg`
 - Hero source prompt used a photorealistic Portland airport shuttle scene with no readable logos, license text, watermark, or in-image text
+- Ten landing pages rewritten with distinct intent-specific content blocks
+- Blog posts expanded with unique article sections
 
 ## Browser QA
 
@@ -52,6 +59,10 @@ Checked locally with the in-app browser:
 - Contact page route and booking form
 - `sitemap.xml` and `robots.txt`
 - Mobile, tablet, and desktop viewport overflow checks
+- No dummy `(503) 000-0000` or `booking@example.com` rendered
+- No placeholder testimonial labels rendered
+- No SearchAction schema rendered
+- Open Graph image resolves to JPG metadata
 
 ## Booking API
 
@@ -69,4 +80,12 @@ Before deploying publicly, replace placeholders in `.env.local` / Hostinger envi
 - Booking destination and sender email
 - Verified real reviews before adding Review schema
 
-Current placeholder canonical and sitemap domain is `https://example.com` until `NEXT_PUBLIC_SITE_URL` is set.
+Current fallback canonical and sitemap domain is `https://pdxtoshuttle.com`. Public LocalBusiness phone, email, address, and hours are omitted until real environment variables are set.
+
+## Content Similarity Check
+
+Local rendered-page five-word overlap check across landing pages and blog posts:
+
+- Highest pair overlap: 42.8%
+- Prior audit reported landing pages at approximately 87-90% similar
+- Remaining overlap is largely shared navigation, booking form, FAQ, and footer structure

@@ -5,7 +5,18 @@ import { BookingForm } from "@/components/booking-form";
 import { JsonLd } from "@/components/json-ld";
 import { ConversionBand, FaqSection, PricingPreview, SectionHeading, ServicesOverview } from "@/components/sections";
 import { baseMetadata, breadcrumbSchema, faqSchema } from "@/lib/seo";
-import { landingPages, pageContent, PageSlug, serviceAreas, services, site } from "@/lib/site";
+import {
+  hasPublicAddress,
+  hasPublicEmail,
+  hasPublicPhone,
+  landingPages,
+  landingPageCopy,
+  pageContent,
+  PageSlug,
+  serviceAreas,
+  services,
+  site,
+} from "@/lib/site";
 
 type Params = Promise<{ slug: string }>;
 
@@ -106,13 +117,17 @@ function SimplePage({
               <SectionHeading
                 eyebrow="Contact"
                 title="Plan your next Portland airport ride."
-                text={`Call ${site.phone}, email ${site.email}, or send the booking request form. Exact reservations are confirmed after availability and route details are reviewed.`}
+                text="Send the booking request form with your route, flight, passenger, and luggage details. Exact reservations are confirmed after availability and timing are reviewed."
               />
               <div className="mt-8 rounded-md border border-[#d9e0ea] bg-[#fbfcfe] p-5 text-sm leading-7 text-[#516070]">
-                <p><strong className="text-[#071426]">Phone:</strong> {site.phone}</p>
-                <p><strong className="text-[#071426]">Email:</strong> {site.email}</p>
+                {hasPublicPhone ? <p><strong className="text-[#071426]">Phone:</strong> {site.phone}</p> : null}
+                {hasPublicEmail ? <p><strong className="text-[#071426]">Email:</strong> {site.email}</p> : null}
                 <p><strong className="text-[#071426]">Area:</strong> {site.area}</p>
+                {hasPublicAddress ? <p><strong className="text-[#071426]">Address:</strong> {site.address}</p> : null}
                 <p><strong className="text-[#071426]">Hours:</strong> {site.hours}</p>
+                {!hasPublicPhone && !hasPublicEmail ? (
+                  <p className="mt-3">Public phone and email will be added after verified business contact details are available.</p>
+                ) : null}
               </div>
             </div>
             <BookingForm />
@@ -222,48 +237,30 @@ function SimplePage({
 }
 
 function LandingPage({ page }: { page: (typeof landingPages)[number] }) {
+  const copy = landingPageCopy[page.slug];
+
   return (
     <>
       <PageHero title={page.title} keyword={page.keyword} description={page.description} />
       <section className="bg-white py-20">
         <div className="section-shell grid gap-10 lg:grid-cols-[1fr_0.85fr]">
           <article>
-            <h2 className="text-3xl font-black text-[#071426]">{page.keyword} with private, professional planning</h2>
+            <h2 className="text-3xl font-black text-[#071426]">{copy.h2}</h2>
             <div className="mt-5 space-y-5 text-base leading-8 text-[#516070]">
-              <p>
-                {page.keyword} service should make the airport day easier, not more complicated.
-                PDX to Shuttle helps Portland travelers arrange private airport transportation with
-                clear route details, scheduled pickup times, and airport-focused communication.
-              </p>
-              <p>
-                For departures, the service is planned around your flight time, pickup address,
-                luggage needs, and passenger count. For arrivals, flight details help the team
-                coordinate around PDX timing, baggage claim, and the final destination.
-              </p>
-              <p>
-                This page targets travelers searching for {page.keyword.toLowerCase()} while keeping
-                the content useful: when to reserve, what information to provide, how private shuttle
-                service compares with rideshare, and why direct airport transportation is often a
-                better fit for families, business travelers, and groups.
-              </p>
-              <p>
-                The best airport transfer is the one that removes small sources of stress before they
-                become problems. Share complete pickup and dropoff details, passenger count, luggage,
-                flight number, and special requests so the final quote reflects the actual ride.
-              </p>
+              {copy.intro.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
-            <h2 className="mt-10 text-2xl font-black text-[#071426]">Why book this Portland airport shuttle option?</h2>
+            <h2 className="mt-10 text-2xl font-black text-[#071426]">Planning notes for {page.keyword}</h2>
             <ul className="mt-5 grid gap-3 text-sm font-semibold text-[#27364a]">
-              {[
-                "Private transportation without unnecessary shared stops",
-                "Pickup planning for early departures and late arrivals",
-                "Useful for business travelers, families, and groups",
-                "Door-to-door routing across Portland and nearby communities",
-                "Clear booking details before the final reservation is confirmed",
-              ].map((item) => (
+              {copy.bullets.map((item) => (
                 <li key={item} className="rounded-md border border-[#d9e0ea] bg-[#fbfcfe] p-4">{item}</li>
               ))}
             </ul>
+            <div className="mt-8 rounded-md border border-[#d9e0ea] bg-[#fbfcfe] p-5">
+              <h2 className="text-xl font-black text-[#071426]">Local relevance</h2>
+              <p className="mt-3 text-sm leading-7 text-[#516070]">{copy.localAngle}</p>
+            </div>
           </article>
           <aside>
             <BookingForm />

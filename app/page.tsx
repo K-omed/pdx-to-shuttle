@@ -11,7 +11,7 @@ import {
   Testimonials,
   WhyChooseUs,
 } from "@/components/sections";
-import { baseMetadata, breadcrumbSchema, faqSchema, organizationSchema } from "@/lib/seo";
+import { baseMetadata, breadcrumbSchema, faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = baseMetadata({
   title: "PDX Shuttle Service | Portland Airport Shuttle | PDX to Shuttle",
@@ -23,7 +23,7 @@ export const metadata: Metadata = baseMetadata({
 export default function Home() {
   return (
     <>
-      <JsonLd data={[organizationSchema(), breadcrumbSchema([{ name: "Home", path: "/" }]), faqSchema()]} />
+      <JsonLd data={[breadcrumbSchema([{ name: "Home", path: "/" }]), faqSchema()]} />
       <Hero />
       <ServicesOverview />
       <FleetSection />

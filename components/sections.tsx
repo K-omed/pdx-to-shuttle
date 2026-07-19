@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckCircle2, MapPin } from "lucide-react";
 import { BookingForm } from "@/components/booking-form";
 import { PrimaryCta, SecondaryCta } from "@/components/cta";
-import { faqs, rates, serviceAreas, services, testimonials, trustBadges, valueProps } from "@/lib/site";
+import { faqs, rates, serviceAreas, services, trustBadges, valueProps } from "@/lib/site";
 
 export function Hero() {
   return (
@@ -134,21 +134,36 @@ export function WhyChooseUs() {
 }
 
 export function Testimonials() {
+  const planningScenarios = [
+    {
+      title: "Early departures",
+      text: "Build the pickup around airline check-in, expected traffic, luggage loading, and a realistic buffer before security.",
+    },
+    {
+      title: "Arriving guests",
+      text: "Use the flight number and destination details to coordinate a calmer pickup after baggage claim and airport exit timing.",
+    },
+    {
+      title: "Business travel",
+      text: "Give visiting clients or team members a scheduled ride plan instead of asking them to solve transportation after landing.",
+    },
+  ];
+
   return (
     <section className="bg-[#071426] py-20 text-white">
       <div className="section-shell">
         <SectionHeading
-          eyebrow="Testimonials"
-          title="Trust signals without fake review claims."
-          text="These sample testimonials are written as generic placeholders until verified customer reviews are supplied for schema markup."
+          eyebrow="Ride planning"
+          title="Clear expectations before the airport day."
+          text="Until verified customer reviews are available, this section focuses on practical trip scenarios instead of presenting placeholder testimonials."
           inverted
         />
         <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {testimonials.map((item) => (
-            <figure key={item.name} className="rounded-md border border-white/15 bg-white/8 p-6">
-              <blockquote className="text-sm leading-7 text-[#dbe5f1]">&ldquo;{item.text}&rdquo;</blockquote>
-              <figcaption className="mt-5 text-sm font-bold text-[#f5e8c8]">{item.name}</figcaption>
-            </figure>
+          {planningScenarios.map((item) => (
+            <article key={item.title} className="rounded-md border border-white/15 bg-white/8 p-6">
+              <h3 className="text-lg font-black text-[#f5e8c8]">{item.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-[#dbe5f1]">{item.text}</p>
+            </article>
           ))}
         </div>
       </div>

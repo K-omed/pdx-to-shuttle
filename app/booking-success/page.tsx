@@ -8,6 +8,7 @@ export const metadata: Metadata = baseMetadata({
   title: `Booking Request Received | ${site.name}`,
   description: "Your PDX to Shuttle booking request has been received.",
   path: "/booking-success",
+  noindex: true,
 });
 
 export default function BookingSuccessPage() {

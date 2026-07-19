@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/json-ld";
 import { ConversionBand } from "@/components/sections";
 import { articleSchema, baseMetadata, breadcrumbSchema } from "@/lib/seo";
-import { blogPosts, site } from "@/lib/site";
+import { blogPostBodies, blogPosts, site } from "@/lib/site";
 
 type Params = Promise<{ slug: string }>;
 
@@ -30,6 +30,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
+  const body = blogPostBodies[post.slug];
 
   return (
     <>
@@ -53,28 +54,16 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         </header>
         <div className="section-shell max-w-3xl py-16">
           <div className="space-y-6 text-base leading-8 text-[#516070]">
-            <p>
-              Planning airport transportation is easiest when the pickup time, travel route, luggage,
-              and airport schedule are considered together. For Portland travelers, PDX can be simple
-              to reach when the ride is reserved with complete details.
-            </p>
-            <p>
-              A private airport shuttle is often a strong fit when timing matters, luggage is heavy,
-              a group is traveling together, or a business guest needs a polished arrival. Rideshare
-              can work for flexible trips, but scheduled shuttle service gives the reservation a more
-              predictable structure.
-            </p>
-            <h2 className="text-2xl font-black text-[#071426]">What to share when booking</h2>
-            <p>
-              Include your pickup address, dropoff address, flight number, date, time, passenger
-              count, luggage count, and any special requests. Complete details help the team quote
-              accurately and plan the ride around real airport conditions.
-            </p>
-            <h2 className="text-2xl font-black text-[#071426]">Why timing matters at PDX</h2>
-            <p>
-              Airport timing depends on airline, flight type, security lines, traffic, and passenger
-              needs. When in doubt, build in extra time and choose a pickup plan that avoids rushing.
-            </p>
+            {body.sections.map((section) => (
+              <section key={section.heading}>
+                <h2 className="text-2xl font-black text-[#071426]">{section.heading}</h2>
+                <div className="mt-4 space-y-4">
+                  {section.body.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+            ))}
           </div>
         </div>
       </article>
